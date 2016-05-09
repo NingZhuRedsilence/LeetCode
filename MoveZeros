@@ -1,0 +1,70 @@
+public class Solution {
+    //static int pZero = 0;
+    //static int pNonZero = 0;
+    //solved this scope/pass by value issue by making the move functions return an int (1) for step
+    //what's a simpler solution?
+    
+    public static void moveZeroes(int[] nums) {
+    	// examples: 0 1 3 0 12  or  1 0 3 12 0 
+    	// since we want all zeros on the right end and keep order of the non-zero numbers
+    	// we can swap the first zero we see with the first non-zero number we see on the right-hand side of that zero
+    	// so we need two pointers, pZero to find zeros, pNonZero stays ahead of pZero to look for non-zero numbers
+    	//base case, nums = [] or nums.length == 1
+    	if ((null == nums)||(nums.length == 1)) {
+    		return;
+    	}
+    	
+    	int pZero = 0;
+        int pNonZero = 0;
+
+    	// need to define the behaviors of the two pointers (how they move)
+    	// move through nums
+    	while ((pZero < nums.length)&&(pNonZero < nums.length)) {
+    	    //pZero needs to be on the left of pNonZero
+    		//System.out.println(pZero + ", " + pNonZero);
+    		//only swap value when pZero == 0 and pNonZero == nonZero
+    		if ((nums[pZero] == 0)&&(nums[pNonZero] != 0)) {
+    			nums[pZero] = nums[pNonZero];
+    			nums[pNonZero] = 0;
+    			//System.out.println("swapped " + nums[pZero] + " and " + nums[pNonZero]
+    			//		+ ", now Pzero points to " + nums[pZero] + " and pNonZero points to " + nums[pNonZero]);
+    		}
+    		pZero += movePZero(pZero, nums);
+    		pNonZero += movePNonZero(pNonZero, pZero, nums); 
+    		//vulnerable for ArrayIndexOutOfBoundException 
+    		//because I changed pZero/pNonZero after validating them 
+    		//and evaluated nums[pZero/pNonZero] after changing them so broke the while statement logic control
+    		//inversely, only evaluate indices in context  of DS directly after if/while/for validation
+    		//& change values near the end of a loop
+ 
+    	}
+    }
+
+    public static boolean isZero(int value) {
+    	return value == 0;
+    }
+
+    public static int movePZero(int _pZero, int[] _nums) { 
+    	// Again! Mistake passing the indices in, the original values were never changed
+    	// pZero keeps moving if is not zero
+    	if (!isZero(_nums[_pZero])) {
+    		return 1;
+    	}
+    	return 0; //remember return statement
+    }
+
+    public static int movePNonZero(int _pNonZero, int _pZero, int[] _nums){
+    	//pNonZero keeps moving if is zero
+    	if (isZero(_nums[_pNonZero])) {
+    		return 1;
+    	}
+    	else {
+    	    //pNonZero needs to be on the right side of pZero!!
+    	    if(_pNonZero <= _pZero) {
+    	        return _pZero - _pNonZero + 1;
+    	    }   
+    	}
+    	return 0;
+
+    }
+}
