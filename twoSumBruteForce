@@ -2,6 +2,8 @@ public class Solution {
     public int[] twoSum(int[] nums, int target) 
     {
         //for each elem x, check each elem y for y == target - x
+        //complement: a number or quantity of something required to make a group complete.
+        // elem y == target - x, then y is x's complement
         for (int i = 0; i < nums.length; i++) // forgot 'int' before 'i'
         {
             int checker = target - nums[i]; // change space complexity?
