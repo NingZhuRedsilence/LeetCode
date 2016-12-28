@@ -1,0 +1,57 @@
+public class Solution {
+    public int[] twoSum(int[] nums, int target) 
+    {
+        //for each elem x, check each elem y for y == target - x
+        for (int i = 0; i < nums.length; i++) // forgot 'int' before 'i'
+        {
+            int checker = target - nums[i]; // change space complexity?
+            
+            for (int j = i + 1; j < nums.length; j++)
+            {
+                if (nums[j] == checker)
+                {
+                    return new int[] {i, j};//wrong syntax (array dimension missing): return new int[] = {i, j};//wrong syntax (expect ']'): return new int[i , j]; // illegal start of expression: return [i, j];
+                }
+            }
+        }
+        return null;
+    }
+    
+    // Assuming 2x == target is a valid solution, wrong
+    // public int[] twoSum(int[] nums, int target) 
+    // {
+    //     //for each elem x, check each elem y for y == target - x
+    //     for (int i = 0; i < nums.length; i++) // forgot 'int' before 'i'
+    //     {
+    //         int checker = target - nums[i]; // change space complexity?
+            
+    //         for (int j = 0; j < nums.length; j++)
+    //         {
+    //             if (nums[j] == checker)
+    //             {
+    //                 return new int[] {i, j};//wrong syntax (array dimension missing): return new int[] = {i, j};//wrong syntax (expect ']'): return new int[i , j]; // illegal start of expression: return [i, j];
+    //             }
+    //         }
+    //     }
+    //     return null;
+    // }
+    
+    
+    // //test run
+    // public void main(string[] args)
+    // {
+    //     int[] testInput = [2, 7, 11, 15];
+    //     int testTarget = 9;
+    //     int[] result = int(2); //should specify length here? What if 2x == target?
+        
+    //     result = twoSum(testInput, testTarget); // if returns nothing, trigger NullPointerException?
+    //     if (result != null)
+    //     {
+    //         System.out.println("result is"  +  result);
+    //     } else
+    //     {
+    //         System.out.println("No twoSum solution");
+    //     }
+        
+    // }
+}
