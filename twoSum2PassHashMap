@@ -1,0 +1,29 @@
+public class Solution 
+{
+    public int[] twoSum(int[] nums, int target) 
+    {
+        Map<Integer, Integer> map = new HashMap <>();
+        // for each elem x, store x and index of x in a hash table
+        // Design of the table
+        // 'cuz key serves as (part of) checker (the logic term for it?) --> x should be the key
+        // 'cuz indice are the values of interest --> index of x should be the value
+        for (int i = 0; i < nums.length; i++)
+        {
+            map.put(nums[i], i);
+        }
+        
+        // check for complements
+        for (int i = 0; i < nums.length; i++)
+        {
+            int complement = target - nums[i]; // change space complexity?
+            //where did the question say that the complement can't be the element itself?
+            if (map.containsKey(complement) && (map.get(complement) != i)) // messed up '('
+            {
+                return new int[] {i, map.get(complement)};
+            }
+        }
+        
+        return null; // what should be the right default return type?
+    }
+    
+}
