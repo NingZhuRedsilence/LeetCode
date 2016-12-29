@@ -1,0 +1,30 @@
+public class Solution 
+{
+    public int[] twoSum(int[] nums, int target) 
+    {
+        // Look-up problem --> use hash table to store elements in order to get O(1) lookup time
+        // Design of the table
+        // 'cuz key serves as (part of) checker (the logic term for it?) --> x should be the key
+        // 'cuz indice are the values of interest --> index of x should be the value
+        Map<Integer, Integer> map = new HashMap <>();
+        
+        // for each elem x:
+        // 1. compute complement
+        // 2. check whether complement of x is in the table
+        // 3a. if true, return [index of x, index of complement]
+        // 3b. if false, put x and index of x into the table
+        for (int i = 0; i < nums.length; i++)
+        {
+            int complement = target - nums[i]; 
+            
+            if (map.containsKey(complement))
+            {
+                return new int[] {i, map.get(complement)};
+            }
+            map.put(nums[i], i);
+        }
+        
+        return null; // what should be the right default return type?
+    }
+    
+}
